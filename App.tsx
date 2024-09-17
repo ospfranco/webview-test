@@ -6,54 +6,11 @@
  */
 
 import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import {SafeAreaView, StyleSheet, Text, useColorScheme} from 'react-native';
+import WebView from 'react-native-webview';
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -63,56 +20,17 @@ function App(): React.JSX.Element {
   };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
+    <SafeAreaView style={{flex: 1}}>
+      <Text>Webview:</Text>
+      <WebView
+        source={{
+          uri: 'https://auth.uber.com/v2?x-uber-device-location-latitude=0.0&known_user=false&x-uber-device=android&x-uber-device-udid=ec0398b3-c572-3509-bcab-62ab9a1a1bb2&x-uber-device-location-longitude=0.0&x-uber-hot-launch-id=af69b1bc-0890-43d9-9aad-b145d398c930&x-uber-app-device-id=fcdfb20b-d620-43ea-929d-799607ba7b48&sim_mnc=&countryCode=US&showDebugInfo=false&sim_mcc=&codeChallenge=bC1xyDWJlAx-sX02Mqwcum_BOvsuD8ZwKeKlkJPQi0o&socialNative=g&isChromeCustomTabSession=false&x-uber-client-id=com.ubercab&x-uber-cold-launch-id=b654393e-2f78-48ac-8df8-20b08fc49b54&app_url=uberlogin%253A%252F%252Fauth3.uber.com%252Fapplogin%252Fhelix&firstPartyClientID=zozycDbnl17oSjKXdw_x_QuNvq5wfRHq&x-uber-client-name=client&isEmbedded=true&asms=true&x-uber-client-version=4.536.10001',
+        }}
+        userAgent="Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Mobile Safari/537.36"
+        style={{marginTop: 20, flex: 1, width: '100%'}}
       />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
 export default App;
